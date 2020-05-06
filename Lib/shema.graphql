@@ -1,0 +1,62 @@
+type Country {
+    _id: ID!
+    code: String!
+	lat: Float!
+	lng:Float! 
+	bedsTotal: Float!
+	bedsAverage: Float!
+	populationAverage: Float!    
+	estimatedBedsTotal: Float! 
+	estimatedBedsAverage: Float!     
+	typebed: [Bed]     
+}
+type Bed {
+    _id: ID!
+    type: String
+    total: Float!
+    percentage: Float!
+    population: Float!
+    estimatedForPopulation: Float!
+    source: String!
+    sourceUrl: String!
+    year: Int
+}
+
+
+input BedInput {    
+    type: String
+    total: Float!
+    percentage: Float!
+    population: Float!
+    estimatedForPopulation: Float!
+    source: String!
+    sourceUrl: String!
+    year: Int
+}
+
+input CountryInput {
+    code: String!
+	lat: Float!
+	lng:Float! 
+	bedsTotal: Float!
+	bedsAverage: Float!
+	populationAverage: Float!    
+	estimatedBedsTotal: Float! 
+	estimatedBedsAverage: Float! 
+}
+
+
+type Mutation{
+    "Crea un Pais"
+    createCountry(input:CountryInput):Country
+    
+}
+
+type Query {
+  "Devuelve todos cursos"
+  getCountrys: [Country]
+  "Devuelve solo un curso"
+  getCountry(code: String!):Country
+
+
+}
