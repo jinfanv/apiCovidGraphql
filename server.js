@@ -6,7 +6,7 @@ const {makeExecutableSchema } = require('graphql-tools')
 const {readFileSync} = require('fs')
 const {join} = require('path')
 
-const resolvers = require('./lib/resolvers')
+const resolvers = require('./Lib/resolvers')
 
 const cors = require('cors')
 
@@ -18,7 +18,7 @@ const port = process.env.PORT || 3000
 const isDev = process.env.NODE_ENV !== "production"?false:true
 
 const typeDefs = readFileSync(
-    join(__dirname,'lib','shema.graphql'),
+    join(__dirname,'Lib','shema.graphql'),
     'utf-8'
 )
 
