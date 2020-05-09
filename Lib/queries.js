@@ -25,12 +25,69 @@ module.exports = {
 
       try {
         db = await connectDb()
-        course = await db.collection('countrys').findOne({code:String})
+        course = await db.collection('countrys').findOne({code:code})
       } catch (error) {
         console.error(error);
         
       }
 
       return course
+    },
+    getBeds: async () => {
+      let db
+      let beds = []
+
+      try {
+        db = await connectDb()
+        beds = await db.collection('beds').find().toArray()
+      } catch (error) {
+        console.error(error);
+        
+      }
+
+      return beds
+    },
+    getBed: async (root,{bedId}) => {
+      let db
+      let bed
+
+      try {
+        db = await connectDb()
+        bed = await db.collection('beds').findOne({_id:ObjectID(bedId)})
+      } catch (error) {
+        console.error(error);
+        
+      }
+
+      return bed
+    },
+    getRestrictions: async () => {
+      let db
+      let Restrictions = []
+
+      try {
+        db = await connectDb()
+        Restrictions = await db.collection('Restrictions').find().toArray()
+      } catch (error) {
+        console.error(error);
+        
+      }
+
+      return Restrictions
+    },
+    getRestriction: async (root,{resId}) => {
+      let db
+      let Restriction
+
+      try {
+        db = await connectDb()
+        Restriction = await db.collection('Restrictions').findOne({_id:ObjectID(resId)})
+      } catch (error) {
+        console.error(error);
+        
+      }
+
+      return Restriction
     }
+
 }

@@ -8,10 +8,12 @@ type Country {
 	populationAverage: Float!    
 	estimatedBedsTotal: Float! 
 	estimatedBedsAverage: Float!     
-	typebed: [Bed]     
+	typebed: [Bed]
+    restrictions: [Restriction]     
 }
 type Bed {
     _id: ID!
+    code: String!
     type: String
     total: Float!
     percentage: Float!
@@ -22,9 +24,38 @@ type Bed {
     year: Int
 }
 
+type Restriction {
+    _id: ID!
+    code: String!
+    dateStart: String!
+    dateEnd: String!
+    description: String!
+    keywords: [String]!
+    exceptions: String!
+    quantity: String!
+    targetCity: [String]!
+    targetCountry: String!
+    targetRegion: String!
+    targetState: String!    
+}
 
-input BedInput {    
-    type: String
+input RestrictionInput {
+    code: String!
+    dateStart: String!
+    dateEnd: String!
+    description: String!
+    keywords: [String]!
+    exceptions: String!
+    quantity: String!
+    targetCity: [String]!
+    targetCountry: String!
+    targetRegion: String!
+    targetState: String!  
+}
+
+input BedInput { 
+    code: String!   
+    type: String!
     total: Float!
     percentage: Float!
     population: Float!
@@ -42,14 +73,48 @@ input CountryInput {
 	bedsAverage: Float!
 	populationAverage: Float!    
 	estimatedBedsTotal: Float! 
-	estimatedBedsAverage: Float! 
+	estimatedBedsAverage: Float!
+     
+
 }
 
 
 type Mutation{
     "Crea un Pais"
-    createCountry(input:CountryInput):Country
-    
+    createCountry(input:CountryInput!):Country
+
+    "Crea una Cama"
+    createBed(input:BedInput!):Bed
+
+    "Crea una Restriccion"
+    createRestriction(input:RestrictionInput!):Restriction
+
+    "Agregar Camas al Pais"
+    addBed(countryId:String!, bedId: ID!):Country
+
+    "Agregar Restriction al Pais"
+    addRestriction(countryCode:String!, restrictionId: ID!):Country
+
+
+    "Editar Pais"
+    editCountry(countryId:String!,input:CountryInput!):Country
+
+    "Editar Camas"
+    editBed(_id: ID!,input:BedInput!):Bed
+
+    "Editar Restricciones"
+    editRestriction(_id: ID!,input:RestrictionInput!):Bed
+
+
+    "Elimina un Pais"
+    deleteCountry(_id: ID!): Boolean
+
+    "Elimina un Cama"
+    deleteBed(_id: ID!): Boolean
+
+    "Elimina un Restriccion"
+    deleteRestriction(_id: ID!): Boolean
+
 }
 
 type Query {
@@ -58,5 +123,15 @@ type Query {
   "Devuelve solo un curso"
   getCountry(code: String!):Country
 
+  "Devuelve todas las Camas"
+  getBeds: [Bed]
+  "Devuelve solo un Cama por Codigo"
+  getBed(bedId: ID!):Bed
+
+
+  "Devuelve todas las restricciones"
+  getRestrictions: [Restriction]
+  "Devuelve solo un Cama por Codigo"
+  getRestriction(resId: ID!):Restriction
 
 }
