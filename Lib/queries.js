@@ -1,7 +1,7 @@
 'use strict'
 
 const connectDb = require('./db')
-const { ObjectID } = require('mongodb')
+const { ObjectID } = require('./node_modules/mongodb')
 //const {errorHandler} = require('./errorhandler')
 
 module.exports = {

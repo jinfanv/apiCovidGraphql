@@ -6,7 +6,7 @@ const {makeExecutableSchema } = require('graphql-tools')
 const {readFileSync} = require('fs')
 const {join} = require('path')
 
-const resolvers = require('./Lib/resolvers')
+const resolvers = require('./lib/resolvers')
 
 const cors = require('cors')
 
