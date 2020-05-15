@@ -15,7 +15,7 @@ const gqlMiddleware = require('express-graphql')
 const app = express()
 
 const port = process.env.PORT || 3000
-const isDev = process.env.NODE_ENV !== "production"?false:true
+const isDev = process.env.NODE_ENV == "production"?false:true
 
 const typeDefs = readFileSync(
     join(__dirname,'Lib','shema.graphql'),
@@ -27,7 +27,7 @@ const schema = makeExecutableSchema({typeDefs,resolvers})
 
 app.use(cors())
 
-app.use('/bed', gqlMiddleware({
+app.use('/', gqlMiddleware({
   schema: schema,
   rootValue: resolvers,
   graphiql: true
