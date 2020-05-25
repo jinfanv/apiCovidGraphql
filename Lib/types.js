@@ -18,7 +18,7 @@ module.exports = {
                 
                 if (ids.length > 0 ) {
 
-                    let data = await db.collection('beds').find({ _id: { $in: ids } })
+                    let data = await db.collection('Beds').find({ _id: { $in: ids } })
                                             
                     return data.toArray()
                 }else{
@@ -31,14 +31,13 @@ module.exports = {
             }
         },
 
-        restrictions:async ({Restriction}) =>{
-            let db
-            let RestrictionData
+        restrictions:async ({restrictions}) =>{
+            let db            
             let ids
 
             try {
                 db = await connectDb()
-                ids = Restriction ? Restriction.map(id=>ObjectID(id)):[]
+                ids = restrictions ? restrictions.map(id=>ObjectID(id)):[]
                
                 if (ids.length > 0 ) {
 
@@ -54,8 +53,6 @@ module.exports = {
                 console.error(error);
                 
             }
-
-            return RestrictionData
         }
     }
 }

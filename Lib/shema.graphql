@@ -17,7 +17,7 @@ type Bed {
     type: String
     total: Float!
     percentage: Float!
-    population: Float!
+    population: Int!
     estimatedForPopulation: Float!
     source: String!
     sourceUrl: String!
@@ -31,12 +31,12 @@ type Restriction {
     dateEnd: String!
     description: String!
     keywords: [String]!
-    exceptions: String!
+    exceptions: [String]
     quantity: String!
     targetCity: [String]!
-    targetCountry: String!
-    targetRegion: String!
-    targetState: String!    
+    targetCountry: [String]!
+    targetRegion: [String]
+    targetState: [String]    
 }
 
 input RestrictionInput {
@@ -45,12 +45,12 @@ input RestrictionInput {
     dateEnd: String!
     description: String!
     keywords: [String]!
-    exceptions: String!
+    exceptions: [String]
     quantity: String!
     targetCity: [String]!
-    targetCountry: String!
-    targetRegion: String!
-    targetState: String!  
+    targetCountry: [String]!
+    targetRegion: [String]
+    targetState: [String]  
 }
 
 input BedInput { 
@@ -58,7 +58,7 @@ input BedInput {
     type: String!
     total: Float!
     percentage: Float!
-    population: Float!
+    population: Int!
     estimatedForPopulation: Float!
     source: String!
     sourceUrl: String!
@@ -118,10 +118,45 @@ type Mutation{
 }
 
 type Query {
-  "Devuelve todos cursos"
+  "Devuelve todos Paises"
   getCountrys: [Country]
-  "Devuelve solo un curso"
+  "Devuelve solo un pais"
   getCountry(code: String!):Country
+
+  "Devuelve todos Paises Top Capacidad - scala"
+  getTopScaleCountrys: [Country]
+  "Devuelve solo un "
+  getTopScaleCountry(code: String!):Country
+
+
+  
+  "Devuelve todos Paises Bottom Capacidad - scala"
+  getBottomScaleCountrys: [Country]
+  "Devuelve solo un "
+  getBottomScaleCountry(code: String!):Country
+
+
+  "Devuelve todos Paises Top Capacidad - Estimate"
+  getTopEstimateCountrys: [Country]
+  "Devuelve solo un "
+  getTopEstimateCountry(code: String!):Country
+
+  "Devuelve todos Paises Bottom Capacidad - Estimate"
+  getBottomEstimateCountrys: [Country]
+  "Devuelve solo un "
+  getBottomEstimateCountry(code: String!):Country
+
+  "Devuelve todos Paises Top Average bed Capacity - scale"
+  getTopAvgScaleCountrys: [Country]
+  "Devuelve solo un "
+  getTopAvgScaleCountry(code: String!):Country
+
+ 
+"Devuelve todos Paises Bottom Average bed Capacity - estimete"
+  getBottomAvgScaleCountrys: [Country]
+  "Devuelve solo un "
+  getBottomAvgScaleCountry(code: String!):Country
+
 
   "Devuelve todas las Camas"
   getBeds: [Bed]

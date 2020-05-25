@@ -15,7 +15,7 @@ module.exports = {
         let newCountry = input
         try {
             db = await connectDb()
-            coutry = await db.collection('countrys').insertOne(input)
+            coutry = await db.collection('Country').insertOne(input)
             newCountry._id = coutry.insertedId
         } catch (error) {
             console.log(error);        
@@ -30,7 +30,7 @@ module.exports = {
         let newbed = input
         try {
             db = await connectDb()
-            bed = await db.collection('beds').insertOne(input)
+            bed = await db.collection('Beds').insertOne(input)
             newbed._id = bed.insertedId
         } catch (error) {
             console.log(error);        
@@ -60,13 +60,13 @@ module.exports = {
         let Bed
         try {
             db = await connectDb()
-            Country = await db.collection('countrys').findOne({code:countryId})
-            Bed = await db.collection('beds').findOne({_id:ObjectID(bedId)})
+            Country = await db.collection('Country').findOne({code:countryId})
+            Bed = await db.collection('Beds').findOne({_id:ObjectID(bedId)})
             
             if(!Country && !Bed) throw new Error("No existe el Pais o la Cama")
             
             
-            await db.collection('countrys').updateOne(
+            await db.collection('Country').updateOne(
                 {code:countryId},
                 {$addToSet:{typebed: ObjectID(bedId)}}
             )
@@ -84,13 +84,13 @@ module.exports = {
             let restriction
             try {
                 db = await connectDb()
-                Country = await db.collection('countrys').findOne({code:countryId})
+                Country = await db.collection('Country').findOne({code:countryId})
                 restriction = await db.collection('Restrictions').findOne({_id:ObjectID(restrictionId)})
                 
                 if(!Country && !Bed) throw new Error("No existe el Pais o la Cama")
                 
                 
-                await db.collection('countrys').updateOne(
+                await db.collection('Country').updateOne(
                     {code:countryId},
                     {$addToSet:{Restriction: ObjectID(restrictionId)}}
                 )
@@ -106,11 +106,11 @@ module.exports = {
     
         try {
           db = await connectDb()
-          await db.collection('countrys').updateOne(
+          await db.collection('Country').updateOne(
             { _id: ObjectID(_id) },
             { $set: input }
           )
-          Country = await db.collection('countrys').findOne(
+          Country = await db.collection('Country').findOne(
             { _id: ObjectID(_id) }
           )
         } catch (error) {
@@ -164,7 +164,7 @@ module.exports = {
     
         try {
           db = await connectDb()
-          await db.collection('countrys').deleteOne(
+          await db.collection('Country').deleteOne(
             { _id: ObjectID(_id) }
           )
         } catch (error) {
@@ -180,7 +180,7 @@ module.exports = {
     
         try {
           db = await connectDb()
-          await db.collection('beds').deleteOne({
+          await db.collection('Beds').deleteOne({
             _id: ObjectID(_id)
           })
         } catch (error) {
