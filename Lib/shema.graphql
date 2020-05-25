@@ -33,10 +33,10 @@ type Restriction {
     keywords: [String]!
     exceptions: [String]
     quantity: String!
-    targetCity: [String]!
-    targetCountry: [String]!
-    targetRegion: [String]
-    targetState: [String]    
+    implementingCities: [String]!
+    targetCountries: [String]!
+    targetRegions: [String]
+    implementingStates: [String]    
 }
 
 input RestrictionInput {
@@ -47,10 +47,10 @@ input RestrictionInput {
     keywords: [String]!
     exceptions: [String]
     quantity: String!
-    targetCity: [String]!
-    targetCountry: [String]!
-    targetRegion: [String]
-    targetState: [String]  
+    implementingCities: [String]!
+    targetCountries: [String]!
+    targetRegions: [String]
+    implementingStates: [String]    
 }
 
 input BedInput { 
