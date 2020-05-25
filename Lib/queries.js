@@ -38,7 +38,7 @@ module.exports = {
 
     try {
       db = await connectDb();
-      courses = await db.collection("TopScaleCountry").find().toArray();
+      courses = await db.collection("CountryTopScale").find().toArray();
     } catch (error) {
       console.error(error);
     }
@@ -51,7 +51,7 @@ module.exports = {
 
     try {
       db = await connectDb();
-      course = await db.collection("TopScaleCountry").findOne({ code: code });
+      course = await db.collection("CountryTopScale").findOne({ code: code });
     } catch (error) {
       console.error(error);
     }
@@ -64,7 +64,7 @@ module.exports = {
 
     try {
       db = await connectDb();
-      courses = await db.collection("BottomScaleCountry").find().toArray();
+      courses = await db.collection("CountryBottomScale").find().toArray();
     } catch (error) {
       console.error(error);
     }
@@ -77,7 +77,7 @@ module.exports = {
 
     try {
       db = await connectDb();
-      course = await db.collection("BottomScaleCountry").findOne({ code: code });
+      course = await db.collection("CountryBottomScale").findOne({ code: code });
     } catch (error) {
       console.error(error);
     }
@@ -91,7 +91,7 @@ module.exports = {
 
     try {
       db = await connectDb();
-      courses = await db.collection("TopEstimateCountry").find().toArray();
+      courses = await db.collection("CountryTopEstimate").find().toArray();
     } catch (error) {
       console.error(error);
     }
@@ -104,7 +104,7 @@ module.exports = {
 
     try {
       db = await connectDb();
-      course = await db.collection("TopEstimateCountry").findOne({ code: code });
+      course = await db.collection("CountryTopEstimate").findOne({ code: code });
     } catch (error) {
       console.error(error);
     }
@@ -117,7 +117,7 @@ module.exports = {
 
     try {
       db = await connectDb();
-      courses = await db.collection("BottomEstimateCountry").find().toArray();
+      courses = await db.collection("CountryBottomEstimate").find().toArray();
     } catch (error) {
       console.error(error);
     }
@@ -130,7 +130,7 @@ module.exports = {
 
     try {
       db = await connectDb();
-      course = await db.collection("BottomEstimateCountry").findOne({ code: code });
+      course = await db.collection("CountryBottomEstimate").findOne({ code: code });
     } catch (error) {
       console.error(error);
     }
@@ -143,7 +143,7 @@ module.exports = {
 
     try {
       db = await connectDb();
-      courses = await db.collection("TopAvgScaleCountry").find().toArray();
+      courses = await db.collection("CountryTopAvgScala").find().toArray();
     } catch (error) {
       console.error(error);
     }
@@ -156,7 +156,7 @@ module.exports = {
 
     try {
       db = await connectDb();
-      course = await db.collection("TopAvgScaleCountry").findOne({ code: code });
+      course = await db.collection("CountryTopAvgScala").findOne({ code: code });
     } catch (error) {
       console.error(error);
     }
@@ -168,7 +168,7 @@ module.exports = {
 
     try {
       db = await connectDb();
-      courses = await db.collection("BottomAvgScaleCountry").find().toArray();
+      courses = await db.collection("CountryBottomAvgScala").find().toArray();
     } catch (error) {
       console.error(error);
     }
@@ -181,7 +181,7 @@ module.exports = {
 
     try {
       db = await connectDb();
-      course = await db.collection("BottomAvgScaleCountry").findOne({ code: code });
+      course = await db.collection("CountryBottomAvgScala").findOne({ code: code });
     } catch (error) {
       console.error(error);
     }
