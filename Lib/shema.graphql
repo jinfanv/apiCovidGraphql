@@ -1,172 +1,249 @@
 type Country {
-    _id: ID!
-    code: String!
-	lat: Float!
-	lng:Float! 
-	bedsTotal: Float!
-	bedsAverage: Float!
-	populationAverage: Float!    
-	estimatedBedsTotal: Float! 
-	estimatedBedsAverage: Float!     
-	typebed: [Bed]
-    restrictions: [Restriction]     
+  _id: ID!
+  code: String!
+  lat: Float!
+  lng: Float!
+  bedsTotal: Float!
+  bedsAverage: Float!
+  populationAverage: Float!
+  estimatedBedsTotal: Float!
+  estimatedBedsAverage: Float!
+  typebed: [Bed]
+  restrictions: [Restriction]
 }
 type Bed {
-    _id: ID!
-    code: String!
-    type: String
-    total: Float!
-    percentage: Float!
-    population: Int!
-    estimatedForPopulation: Float!
-    source: String!
-    sourceUrl: String!
-    year: Int
+  _id: ID!
+  code: String!
+  type: String
+  total: Float!
+  percentage: Float!
+  population: Int!
+  estimatedForPopulation: Float!
+  source: String!
+  sourceUrl: String!
+  year: Int
 }
 
 type Restriction {
-    _id: ID!
-    code: String!
-    dateStart: String!
-    dateEnd: String!
-    description: String!
-    keywords: [String]!
-    exceptions: [String]
-    quantity: String!
-    implementingCities: [String]!
-    targetCountries: [String]!
-    targetRegions: [String]
-    implementingStates: [String]    
+  _id: ID!
+  code: String!
+  dateStart: String!
+  dateEnd: String
+  description: String!
+  keywords: [String!]!
+  exceptions: [String!]!
+  quantity: Int
+  implementingCities: [String!]!
+  targetCountries: [String!]!
+  targetRegions: [String!]!
+  implementingStates: [String!]!
+}
+
+type GeneralRestriction {
+  _id: ID!
+  code: String!
+  keywordsCount: [keywordsCount]
+  keywordsTotal: Int
+  keywordsRecordsTotal: Int
+  sourcesCount: [sourcesCount]
+}
+
+type keywordsCount {
+  keywords: String!
+  count: Int
+}
+
+type sourcesCount {
+  sources: String!
+  count: Int
 }
 
 input RestrictionInput {
-    code: String!
-    dateStart: String!
-    dateEnd: String!
-    description: String!
-    keywords: [String]!
-    exceptions: [String]
-    quantity: String!
-    implementingCities: [String]!
-    targetCountries: [String]!
-    targetRegions: [String]
-    implementingStates: [String]    
+  
+  code: String!
+  dateStart: String!
+  dateEnd: String
+  description: String!
+  keywords: [String!]!
+  exceptions: [String!]!
+  quantity: Int
+  implementingCities: [String!]!
+  targetCountries: [String!]!
+  targetRegions: [String!]!
+  implementingStates: [String!]!
 }
 
-input BedInput { 
-    code: String!   
-    type: String!
-    total: Float!
-    percentage: Float!
-    population: Int!
-    estimatedForPopulation: Float!
-    source: String!
-    sourceUrl: String!
-    year: Int
+input BedInput {
+  code: String!
+  type: String!
+  total: Float!
+  percentage: Float!
+  population: Int!
+  estimatedForPopulation: Float!
+  source: String!
+  sourceUrl: String!
+  year: Int
 }
 
 input CountryInput {
-    code: String!
-	lat: Float!
-	lng:Float! 
-	bedsTotal: Float!
-	bedsAverage: Float!
-	populationAverage: Float!    
-	estimatedBedsTotal: Float! 
-	estimatedBedsAverage: Float!
-     
-
+  code: String!
+  lat: Float!
+  lng: Float!
+  bedsTotal: Float!
+  bedsAverage: Float!
+  populationAverage: Float!
+  estimatedBedsTotal: Float!
+  estimatedBedsAverage: Float!
 }
 
+type Mutation {
+  "Crea un Pais"
+  createCountry(input: CountryInput!): Country
 
-type Mutation{
-    "Crea un Pais"
-    createCountry(input:CountryInput!):Country
+  "Crea una Cama"
+  createBed(input: BedInput!): Bed
 
-    "Crea una Cama"
-    createBed(input:BedInput!):Bed
+  "Crea una Restriccion"
+  createRestriction(input: RestrictionInput!): Restriction
 
-    "Crea una Restriccion"
-    createRestriction(input:RestrictionInput!):Restriction
+  "Agregar Camas al Pais"
+  addBed(countryId: String!, bedId: ID!): Country
 
-    "Agregar Camas al Pais"
-    addBed(countryId:String!, bedId: ID!):Country
+  "Agregar Restriction al Pais"
+  addRestriction(countryCode: String!, restrictionId: ID!): Country
 
-    "Agregar Restriction al Pais"
-    addRestriction(countryCode:String!, restrictionId: ID!):Country
+  "Editar Pais"
+  editCountry(countryId: String!, input: CountryInput!): Country
 
+  "Editar Camas"
+  editBed(_id: ID!, input: BedInput!): Bed
 
-    "Editar Pais"
-    editCountry(countryId:String!,input:CountryInput!):Country
+  "Editar Restricciones"
+  editRestriction(_id: ID!, input: RestrictionInput!): Bed
 
-    "Editar Camas"
-    editBed(_id: ID!,input:BedInput!):Bed
+  "Elimina un Pais"
+  deleteCountry(_id: ID!): Boolean
 
-    "Editar Restricciones"
-    editRestriction(_id: ID!,input:RestrictionInput!):Bed
+  "Elimina un Cama"
+  deleteBed(_id: ID!): Boolean
 
-
-    "Elimina un Pais"
-    deleteCountry(_id: ID!): Boolean
-
-    "Elimina un Cama"
-    deleteBed(_id: ID!): Boolean
-
-    "Elimina un Restriccion"
-    deleteRestriction(_id: ID!): Boolean
-
+  "Elimina un Restriccion"
+  deleteRestriction(_id: ID!): Boolean
 }
 
 type Query {
+  
+  "Devuelve las restriciones generales por cada pais"
+  getGeneralRestrictions: [GeneralRestriction]
+
+  "Devuelve las restriciones generales de un pais"
+  getGeneralRestriction(code: String!): GeneralRestriction
+
+  "Devuelve el un pais TOP con restricciones"
+  getGeneralTopRestriction(code:String!):GeneralRestriction 
+
+  "Devuelve el TOP diez Paises con restricciones"
+  getGeneralTopRestrictions:[GeneralRestriction] 
+
+  "Devuelve el Bottom diez Paises con restricciones"
+  getGeneralBottomRestrictions:[GeneralRestriction]
+
+  "Devuelve el pais Bottom con restricciones"
+  getGeneralBottomRestriction(code:String!):GeneralRestriction
+
+  "Devuelve el un pais TOP con restricciones"
+  getMeasureTopRestriction(code:String!):Restriction 
+
+  "Devuelve el TOP diez Paises con restricciones"
+  getMeasureTopRestrictions:[Restriction] 
+
+  "Devuelve el Bottom diez Paises con restricciones"
+  getMeasureBottomRestrictions:[Restriction]
+
+  "Devuelve el pais Bottom con restricciones"
+  getMeasureBottomRestriction(code:String!):Restriction
+
+ 
+
+    "Devuelve el un pais TOP con restricciones"
+  getMeasureTopRestrictionRecords(code:String!):Restriction 
+
+  "Devuelve el TOP diez Paises con restricciones"
+  getMeasureTopRestrictionsRecords:[Restriction] 
+
+  "Devuelve el Bottom diez Paises con restricciones"
+  getMeasureBottomRestrictionsRecords:[Restriction]
+
+  "Devuelve el pais Bottom con restricciones"
+  getMeasureBottomRestrictionRecords(code:String!):Restriction
+
+
+
+ "Devuelve el un pais TOP con restricciones"
+  getGeneralTopRestrictionRecords(code:String!):GeneralRestriction 
+
+  "Devuelve el TOP diez Paises con restricciones"
+  getGeneralTopRestrictionsRecords:[GeneralRestriction] 
+
+  "Devuelve el Bottom diez Paises con restricciones"
+  getGeneralBottomRestrictionsRecords:[GeneralRestriction]
+
+  "Devuelve el pais Bottom con restricciones"
+  getGeneralBottomRestrictionRecords(code:String!):GeneralRestriction
+
+
   "Devuelve todos Paises"
   getCountrys: [Country]
   "Devuelve solo un pais"
-  getCountry(code: String!):Country
+  getCountry(code: String!): Country
 
   "Devuelve todos Paises Top Capacidad - scala"
   getTopScaleCountrys: [Country]
   "Devuelve solo un "
-  getTopScaleCountry(code: String!):Country
+  getTopScaleCountry(code: String!): Country
 
-
-  
   "Devuelve todos Paises Bottom Capacidad - scala"
   getBottomScaleCountrys: [Country]
   "Devuelve solo un "
-  getBottomScaleCountry(code: String!):Country
-
+  getBottomScaleCountry(code: String!): Country
 
   "Devuelve todos Paises Top Capacidad - Estimate"
   getTopEstimateCountrys: [Country]
   "Devuelve solo un "
-  getTopEstimateCountry(code: String!):Country
+  getTopEstimateCountry(code: String!): Country
 
   "Devuelve todos Paises Bottom Capacidad - Estimate"
   getBottomEstimateCountrys: [Country]
   "Devuelve solo un "
-  getBottomEstimateCountry(code: String!):Country
+  getBottomEstimateCountry(code: String!): Country
 
   "Devuelve todos Paises Top Average bed Capacity - scale"
   getTopAvgScaleCountrys: [Country]
   "Devuelve solo un "
-  getTopAvgScaleCountry(code: String!):Country
+  getTopAvgScaleCountry(code: String!): Country
 
- 
-"Devuelve todos Paises Bottom Average bed Capacity - estimete"
+  "Devuelve todos Paises Bottom Average bed Capacity - Scala"
   getBottomAvgScaleCountrys: [Country]
   "Devuelve solo un "
-  getBottomAvgScaleCountry(code: String!):Country
+  getBottomAvgScaleCountry(code: String!): Country
 
+  "Devuelve todos Paises Top Average bed Capacity - Estimate"
+  getTopAvgEstimateCountrys: [Country]
+  "Devuelve solo un "
+  getTopAvgEstimateCountry(code: String!): Country
+
+  "Devuelve todos Paises Bottom Average bed Capacity - Estimete"
+  getBottomAvgEstimateCountrys: [Country]
+  "Devuelve solo un pais Bottom Average bed Capacity - Estimete"
+  getBottomAvgEstimateCountry(code: String!): Country
 
   "Devuelve todas las Camas"
   getBeds: [Bed]
   "Devuelve solo un Cama por Codigo"
-  getBed(bedId: ID!):Bed
-
+  getBed(bedId: ID!): Bed
 
   "Devuelve todas las restricciones"
   getRestrictions: [Restriction]
   "Devuelve solo un Cama por Codigo"
-  getRestriction(resId: ID!):Restriction
-
+  getRestriction(resId: ID!): Restriction
 }

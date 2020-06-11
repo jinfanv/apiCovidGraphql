@@ -2,9 +2,296 @@
 
 const connectDb = require("./db");
 const { ObjectID } = require("mongodb");
-//const {errorHandler} = require('./errorhandler')
+
 
 module.exports = {
+  //Get Measure
+  getGeneralRestrictions: async () => {
+    let db;
+    let Restrictions = [];
+
+    try {
+      db = await connectDb();
+      Restrictions = await db
+        .collection("GeneralMeasureCountry")
+        .find()
+        .toArray();
+    } catch (error) {
+      console.error(error);
+    }
+
+    return Restrictions;
+  },
+  getGeneralRestriction: async (root, { code }) => {
+    let db;
+    let Restriction;
+
+    try {
+      db = await connectDb();
+      Restriction = await db
+        .collection("GeneralMeasureCountry")
+        .findOne({ code: code });
+    } catch (error) {
+      console.error(error);
+    }
+
+    return Restriction;
+  },
+  getGeneralTopRestrictions: async () => {
+    let db;
+    let Restrictions = [];
+
+    try {
+      db = await connectDb();
+      Restrictions = await db
+        .collection("GeneralTopMeasureCountry")
+        .find()
+        .toArray();
+    } catch (error) {
+      console.error(error);
+    }
+
+    return Restrictions;
+  },
+  getGeneralTopRestriction: async (root, { code }) => {
+    let db;
+    let Restriction;
+
+    try {
+      db = await connectDb();
+      Restriction = await db
+        .collection("GeneralTopMeasureCountry")
+        .findOne({ code: code });
+    } catch (error) {
+      console.error(error);
+    }
+
+    return Restriction;
+  },
+  getGeneralBottomRestrictions: async () => {
+    let db;
+    let Restrictions = [];
+
+    try {
+      db = await connectDb();
+      Restrictions = await db
+        .collection("GeneralBottomMeasureCountry")
+        .find()
+        .toArray();
+    } catch (error) {
+      console.error(error);
+    }
+
+    return Restrictions;
+  },
+  getGeneralBottomRestriction: async (root, { code }) => {
+    let db;
+    let Restriction;
+
+    try {
+      db = await connectDb();
+      Restriction = await db
+        .collection("GeneralBottomMeasureCountry")
+        .findOne({ code: code });
+    } catch (error) {
+      console.error(error);
+    }
+
+    return Restriction;
+  },
+  
+  getMeasureTopRestrictions: async () => {
+    let db;
+    let Restrictions = [];
+
+    try {
+      db = await connectDb();
+      Restrictions = await db
+        .collection("MeasureTopMeasureCountry")
+        .find()
+        .toArray();
+    } catch (error) {
+      console.error(error);
+    }
+
+    return Restrictions;
+  },
+  getMeasureTopRestriction: async (root, { code }) => {
+    let db;
+    let Restriction;
+
+    try {
+      db = await connectDb();
+      Restriction = await db
+        .collection("MeasureTopMeasureCountry")
+        .findOne({ code: code });
+    } catch (error) {
+      console.error(error);
+    }
+
+    return Restriction;
+  },
+  getMeasureBottomRestrictions: async () => {
+    let db;
+    let Restrictions = [];
+
+    try {
+      db = await connectDb();
+      Restrictions = await db
+        .collection("MeasureBottomMeasureCountry")
+        .find()
+        .toArray();
+    } catch (error) {
+      console.error(error);
+    }
+
+    return Restrictions;
+  },
+  getMeasureBottomRestriction: async (root, { code }) => {
+    let db;
+    let Restriction;
+
+    try {
+      db = await connectDb();
+      Restriction = await db
+        .collection("MeasureBottomMeasureCountry")
+        .findOne({ code: code });
+    } catch (error) {
+      console.error(error);
+    }
+
+    return Restriction;
+  },
+
+
+
+  getGeneralTopRestrictionsRecords: async () => {
+    let db;
+    let Restrictions = [];
+
+    try {
+      db = await connectDb();
+      Restrictions = await db
+        .collection("GeneralTopMeasureRecordCountry")
+        .find()
+        .toArray();
+    } catch (error) {
+      console.error(error);
+    }
+
+    return Restrictions;
+  },
+  getGeneralTopRestrictionRecords: async (root, { code }) => {
+    let db;
+    let Restriction;
+
+    try {
+      db = await connectDb();
+      Restriction = await db
+        .collection("GeneralTopMeasureRecordCountry")
+        .findOne({ code: code });
+    } catch (error) {
+      console.error(error);
+    }
+
+    return Restriction;
+  },
+  getGeneralBottomRestrictionsRecords: async () => {
+    let db;
+    let Restrictions = [];
+
+    try {
+      db = await connectDb();
+      Restrictions = await db
+        .collection("GeneralBottomMeasureRecordCountry")
+        .find()
+        .toArray();
+    } catch (error) {
+      console.error(error);
+    }
+
+    return Restrictions;
+  },
+  getGeneralBottomRestrictionRecords: async (root, { code }) => {
+    let db;
+    let Restriction;
+
+    try {
+      db = await connectDb();
+      Restriction = await db
+        .collection("GeneralBottomMeasureRecordCountry")
+        .findOne({ code: code });
+    } catch (error) {
+      console.error(error);
+    }
+
+    return Restriction;
+  },
+  
+  getMeasureTopRestrictionsRecords: async () => {
+    let db;
+    let Restrictions = [];
+
+    try {
+      db = await connectDb();
+      Restrictions = await db
+        .collection("MeasureTopMeasureRecordCountry")
+        .find()
+        .toArray();
+    } catch (error) {
+      console.error(error);
+    }
+
+    return Restrictions;
+  },
+  getMeasureTopRestrictionRecords: async (root, { code }) => {
+    let db;
+    let Restriction;
+
+    try {
+      db = await connectDb();
+      Restriction = await db
+        .collection("MeasureTopMeasureRecordCountry")
+        .findOne({ code: code });
+    } catch (error) {
+      console.error(error);
+    }
+
+    return Restriction;
+  },
+  getMeasureBottomRestrictionsRecords: async () => {
+    let db;
+    let Restrictions = [];
+
+    try {
+      db = await connectDb();
+      Restrictions = await db
+        .collection("MeasureBottomMeasureRecordCountry")
+        .find()
+        .toArray();
+    } catch (error) {
+      console.error(error);
+    }
+
+    return Restrictions;
+  },
+  getMeasureBottomRestrictionRecords: async (root, { code }) => {
+    let db;
+    let Restriction;
+
+    try {
+      db = await connectDb();
+      Restriction = await db
+        .collection("MeasureBottomMeasureRecordCountry")
+        .findOne({ code: code });
+    } catch (error) {
+      console.error(error);
+    }
+
+    return Restriction;
+  },
+
+
   //Gets de Country GENERAl
   getCountrys: async () => {
     let db;
@@ -77,14 +364,16 @@ module.exports = {
 
     try {
       db = await connectDb();
-      course = await db.collection("CountryBottomScale").findOne({ code: code });
+      course = await db
+        .collection("CountryBottomScale")
+        .findOne({ code: code });
     } catch (error) {
       console.error(error);
     }
 
     return course;
   },
-  
+
   getTopEstimateCountrys: async () => {
     let db;
     let courses = [];
@@ -104,7 +393,9 @@ module.exports = {
 
     try {
       db = await connectDb();
-      course = await db.collection("CountryTopEstimate").findOne({ code: code });
+      course = await db
+        .collection("CountryTopEstimate")
+        .findOne({ code: code });
     } catch (error) {
       console.error(error);
     }
@@ -130,7 +421,9 @@ module.exports = {
 
     try {
       db = await connectDb();
-      course = await db.collection("CountryBottomEstimate").findOne({ code: code });
+      course = await db
+        .collection("CountryBottomEstimate")
+        .findOne({ code: code });
     } catch (error) {
       console.error(error);
     }
@@ -156,13 +449,16 @@ module.exports = {
 
     try {
       db = await connectDb();
-      course = await db.collection("CountryTopAvgScala").findOne({ code: code });
+      course = await db
+        .collection("CountryTopAvgScala")
+        .findOne({ code: code });
     } catch (error) {
       console.error(error);
     }
 
     return course;
-  },getBottomAvgScaleCountrys: async () => {
+  },
+  getBottomAvgScaleCountrys: async () => {
     let db;
     let courses = [];
 
@@ -181,7 +477,9 @@ module.exports = {
 
     try {
       db = await connectDb();
-      course = await db.collection("CountryBottomAvgScala").findOne({ code: code });
+      course = await db
+        .collection("CountryBottomAvgScala")
+        .findOne({ code: code });
     } catch (error) {
       console.error(error);
     }
