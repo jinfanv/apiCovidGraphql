@@ -32,7 +32,7 @@ type Restriction {
   description: String!
   keywords: [String!]!
   exceptions: [String!]!
-  quantity: Int
+  quantity: String
   implementingCities: [String!]!
   targetCountries: [String!]!
   targetRegions: [String!]!
